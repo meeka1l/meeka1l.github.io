@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meekail's Webtoons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #ff6b6b;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.3em;
+            color: #cccccc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .intro-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        .intro-section p {
+            font-size: 1.1em;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .series-card {
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .series-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .series-banner {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .series-banner.fantasy {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .series-banner.scifi {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .series-banner.romance {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .series-info {
+            padding: 25px;
+        }
+
+        .series-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        .series-genre {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .series-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .series-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #3a3a3a;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #999999;
+        }
+
+        .read-button {
+            display: block;
+            background-color: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        .read-button:hover {
+            background-color: #ff9999;
+        }
+
+        .coming-soon {
+            background-color: #555555;
+            cursor: not-allowed;
+        }
+
+        .coming-soon:hover {
+            background-color: #555555;
+        }
+
+        footer {
+            background-color: #000000;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            color: #cccccc;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #ff6b6b;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1em;
+        }
+
+        .social-links a:hover {
+            color: #ff9999;
+        }
+
+        @media (max-width: 768px) {
+            .series-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meekail's Webtoons</h1>
+        <p>Welcome to my collection of stories</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-section">
+            <h2>About Me</h2>
+            <p>Hi! I'm Meekail, and I create webtoons in the hopes of evoking strong emotion and showing new perspectives to explore. Choose a series below to start reading!</p>
+        </div>
+
+        <div class="series-grid">
+            <!-- Series 1 -->
+            <div class="series-card">
+                <div class="series-banner fantasy">S1</div>
+                <div class="series-info">
+                    <h3>Series Title 1</h3>
+                    <span class="series-genre">Fantasy</span>
+                    <p class="series-description">
+                        A brief but compelling description of your first series. What makes it unique? What will hook readers? Keep it to 2-3 sentences.
+                    </p>
+                    <div class="series-stats">
+                        <div class="stat">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Episodes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">Ongoing</div>
+                            <div class="stat-label">Status</div>
+                        </div>
+                    </div>
+                    <a href="series1/index.html" class="read-button">Start Reading</a>
+                </div>
+            </div>
+
+            <!-- Series 2 -->
+            <div class="series-card">
+                <div class="series-banner scifi">S2</div>
+                <div class="series-info">
+                    <h3>Series Title 2</h3>
+                    <span class="series-genre">Sci-Fi</span>
+                    <p class="series-description">
+                        Your second series description goes here. Make it intriguing and give readers a taste of what to expect from this completely different world.
+                    </p>
+                    <div class="series-stats">
+                        <div class="stat">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Episodes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">Ongoing</div>
+                            <div class="stat-label">Status</div>
+                        </div>
+                    </div>
+                    <a href="series2/index.html" class="read-button">Start Reading</a>
+                </div>
+            </div>
+
+            <!-- Series 3 - Coming Soon -->
+            <div class="series-card">
+                <div class="series-banner romance">S3</div>
+                <div class="series-info">
+                    <h3>Series Title 3</h3>
+                    <span class="series-genre">Romance</span>
+                    <p class="series-description">
+                        This series is coming soon! Tease what readers can expect without giving too much away. Build anticipation for your upcoming release.
+                    </p>
+                    <div class="series-stats">
+                        <div class="stat">
+                            <div class="stat-number">Soon</div>
+                            <div class="stat-label">Release</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2025</div>
+                            <div class="stat-label">Year</div>
+                        </div>
+                    </div>
+                    <a href="#" class="read-button coming-soon">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">Patreon</a>
+        </div>
+    </footer>
+</body>
+</html>

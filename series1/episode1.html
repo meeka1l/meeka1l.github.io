@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode 1 - Imaginarium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #ff6b6b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #ff9999;
+        }
+
+        .reader-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .comic-panel {
+            width: 100%;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .navigation {
+            background-color: #2a2a2a;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            background-color: #ff9999;
+        }
+
+        .nav-button.disabled {
+            background-color: #555555;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .episode-title {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .episode-title h2 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #000000;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            color: #cccccc;
+        }
+
+        @media (max-width: 600px) {
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .nav-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-button">← Back</a>
+        <h1>Series 1 Title</h1>
+    </header>
+
+    <div class="reader-container">
+        <div class="episode-title">
+            <h2>Episode 1: Imagiworld</h2>
+            <p>Published: March 2025</p>
+        </div>
+
+        <!-- YOUR COMIC PANELS GO HERE -->
+        <!-- Replace with your actual image paths -->
+        <img src="Imaginarium_ep1_001" alt="Panel 1" class="comic-panel">
+        <img src="Imaginarium_ep1_002" alt="Panel 2" class="comic-panel">
+        <img src="Imaginarium_ep1_003" alt="Panel 3" class="comic-panel">
+        <!-- Add as many panels as you need by copying the line above -->
+
+        <div class="navigation">
+            <a href="#" class="nav-button disabled">← Previous</a>
+            <a href="index.html" class="nav-button">Series Home</a>
+            <a href="episode2.html" class="nav-button">Next →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <p><a href="../index.html" style="color: #ff6b6b; text-decoration: none;">View All Series</a></p>
+    </footer>
+</body>
+</html>

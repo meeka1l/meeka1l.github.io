@@ -153,11 +153,19 @@
             color: #999999;
         }
 
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
         .read-button {
-            display: block;
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background-color: #ff6b6b;
             color: white;
-            text-align: center;
             padding: 12px;
             text-decoration: none;
             border-radius: 8px;
@@ -270,11 +278,13 @@
                             <div class="stat-label">Status</div>
                         </div>
                     </div>
-                    <a href="series1/index.html" class="read-button">Start Reading</a>
-                    <a href="https://www.webtoons.com/en/canvas/imaginarium/list?title_no=1035356" class="read-button webtoon-button">
-                        <img src="Webtoon-Logo.png" alt="Webtoon Logo" style="height: 20px;">
-                        Read on Webtoon
-                    </a>
+                    <div class="button-container">
+                        <a href="series1/index.html" class="read-button">Start Reading</a>
+                        <a href="https://www.webtoons.com/en/canvas/imaginarium/list?title_no=1035356" class="read-button webtoon-button">
+                            <img src="Webtoon-Logo.png" alt="Webtoon Logo" style="height: 20px;">
+                            Read on Webtoon
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -300,11 +310,13 @@
                             <div class="stat-label">Status</div>
                         </div>
                     </div>
-                    <a href="series2/index.html" class="read-button">Start Reading</a>
-                    <a href="https://www.webtoons.com/en/canvas/how-to-rebel/list?title_no=553235&page=1" class="read-button webtoon-button">
-                        <img src="Webtoon-Logo.png" alt="Webtoon Logo" style="height: 20px;">
-                        Read on Webtoon
-                    </a>
+                    <div class="button-container">
+                        <a href="series2/index.html" class="read-button">Start Reading</a>
+                        <a href="https://www.webtoons.com/en/canvas/how-to-rebel/list?title_no=553235&page=1" class="read-button webtoon-button">
+                            <img src="Webtoon-Logo.png" alt="Webtoon Logo" style="height: 20px;">
+                            Read on Webtoon
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -327,8 +339,10 @@
                             <div class="stat-label">Year</div>
                         </div>
                     </div>
-                    <a href="#" class="read-button coming-soon">Start Reading</a>
-                    <a href="#" class="read-button coming-soon webtoon-button">Read On Webtoon</a>
+                    <div class="button-container">
+                        <a href="#" class="read-button coming-soon">Start Reading</a>
+                        <a href="#" class="read-button coming-soon webtoon-button">Read On Webtoon</a>
+                    </div>
                 </div>
             </div>
             

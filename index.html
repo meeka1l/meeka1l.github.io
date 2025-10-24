@@ -106,6 +106,10 @@
 
         .series-info {
             padding: 25px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 400px; /* Set minimum height for consistent card size */
         }
 
         .series-info h3 {
@@ -128,9 +132,11 @@
             color: #cccccc;
             line-height: 1.6;
             margin-bottom: 15px;
+            /* Remove fixed height and overflow properties to show full text */
         }
 
         .series-stats {
+            margin-top: auto; /* This pushes the stats section to the bottom */
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;

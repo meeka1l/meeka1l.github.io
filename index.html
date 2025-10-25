@@ -227,6 +227,133 @@
             color: #ff9999;
         }
 
+        .update-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 50px;
+        }
+
+        .update-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .update-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .process-section {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
+        .process-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .process-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .process-text p {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .process-images {
+            display: flex;
+            gap: 15px;
+        }
+
+        .process-img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .process-img:hover {
+            transform: scale(1.05);
+        }
+
+        .tools-section {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .tools-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+
+        .tools-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .tools-text p {
+            color: #cccccc;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .tools-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tool-tag {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+
+        .tool-tag:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        .tool-name {
+            color: #ffffff;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
         @media (max-width: 768px) {
             .series-grid {
                 grid-template-columns: 1fr;
@@ -234,6 +361,20 @@
             
             header h1 {
                 font-size: 2em;
+            }
+
+            .process-content,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .update-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tools-content {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -249,6 +390,16 @@
             <h2>About Me</h2>
             <p>Hi! I'm Meekail, and I create webtoons in the hopes of evoking strong emotion and sharing new perspectives to explore. Choose a series below to start reading!</p>
         </div>
+
+        <!-- Add the new sections here -->
+        <div class="update-banner">
+            <div class="update-content">
+                <span class="update-badge">Latest Update</span>
+                <p>How To REBEL Updates Every MONDAY!</p>
+            </div>
+        </div>
+
+        
 
         <div class="series-grid">
             <!-- Series 1 -->
@@ -312,7 +463,7 @@
                 </div>
             </div>
             <div class="series-card">
-                <div class="series-banner scifi">
+                <div class="series-banner scifi" id="hybrid">
                      <img src="series3/hybrid.png" alt="HYBRiD : Blood Night Banner" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="series-info">
@@ -368,10 +519,48 @@
         -->
             
         </div>
+        <div class="process-section">
+            <h2>Behind the Scenes</h2>
+            <div class="process-content">
+                <div class="process-text">
+                    <p>Which came first, The egg or the chicken?</p>
+                </div>
+                <div class="process-images">
+                    <img src="images/sketck.jpg" alt="Sketch Process" class="process-img">
+                    <img src="images/vic23_fanart.png" alt="Final Art" class="process-img">
+                </div>
+            </div>
+        </div>
+
+        <div class="tools-section">
+            <h2>Tools I Use</h2>
+            <div class="tools-content">
+                <div class="tools-text">
+                    <p>I primarily work with CSP but I'm also proficient in IbisPaint as it was my go to before I had a dedicated setup for my webtoon production.<br>
+                    I literally made an entire comic using just my phone (<a href="#hybrid">HYBRiD Blood Night</a>)</p>
+                </div>
+                <div class="tools-box">
+                    <div class="tags">
+                        <div class="tool-tag">
+                            <img src="images/csp.avif" alt="Clip Studio Paint" class="tool-logo">
+                            <div class="tool-name">Clip Studio Paint</div>
+                        </div>
+                        <div class="tool-tag">
+                            <img src="images/ibis.png" alt="IbisPaint" class="tool-logo">
+                            <div class="tool-name">IbisPaint</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Meekail Hanis. All artwork and writing are the property of the creator. Contact for permissions or collaborations.</p>
+        <p>&copy;2025 Meekail Hanis.  
+All artwork and writing are the property of the creator.<br>
+Please do not reproduce or use my work without permission.<br>
+Contact for permissions or collaborations.
+</p>
         <div class="social-links">
             <a href="https://x.com/Can0pu5">Twitter</a>
             <a href="https://www.instagram.com/meekail00/">Instagram</a>

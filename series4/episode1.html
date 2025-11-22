@@ -244,14 +244,14 @@
 </head>
 <body>
     <header>
-        <a href="/series4/index.html" class="back-button">← Back</a>
+        <a href="../index.html" class="back-button">← Back</a>
         <h1>A GREY LIFE</h1>
     </header>
 
     <div class="reader-container">
         <div class="episode-title">
-            <h2>Chapter 1: The Old Man</h2>
-            <p>An Interactive Story</p>
+            <h2>A Grey Life</h2>
+            <p>An Interactive Webtoon</p>
         </div>
 
         <!-- OPENING - ESTABLISH CHARACTER -->
@@ -322,14 +322,11 @@
                 <button class="choice-button" onclick="makeChoice('decision1', 'walk')">
                     🚶 Keep walking. Not your problem. Never is.
                 </button>
-                <button class="choice-button" onclick="makeChoice('decision1', 'compliment')">
-                    💬 "...Hey. Nice posture, old man. You a dancer or something?"
-                </button>
                 <button class="choice-button" onclick="makeChoice('decision1', 'attack')">
                     👊 Check if he's got a wallet. Easy target. You need the money anyway.
                 </button>
-                <button class="choice-button" onclick="makeChoice('decision1', 'roast')">
-                    😤 "Yo gramps, you lost? Nursing home's two blocks that way."
+                <button class="choice-button" onclick="makeChoice('decision1', 'compliment')">
+                    💬 "...Hey. Nice posture, old man. You a dancer or something?"
                 </button>
             </div>
         </div>
@@ -545,7 +542,7 @@
             The alarm is set. Tomorrow, Kazuo will make a choice. And this time, he might choose to live instead of just survive.</p>
         </div>
 
-        <!-- CHOICE 3: ATTACK -->
+        <!-- CHOICE 3: ATTACK - FIRST PART -->
         <div class="comic-panel panel-hidden" data-path="attack">
             <strong>PANEL 10c</strong><br><br>
             <em>KAZUO (internal): "Old guy. Alone. Probably has a wallet. Rent's due in three days and I'm two hundred short."</em><br><br>
@@ -563,123 +560,322 @@
             <strong>PANEL 12c</strong><br><br>
             CRACK.<br><br>
             Kazuo's fist connects with Takeshi's temple. The old man's eyes go wide with shock.<br><br>
-            He staggers backward, hand reaching for the wall that isn't there.
+            He staggers backward and falls while trying to hold onto a non existent wall.
         </div>
 
         <div class="comic-panel panel-hidden" data-path="attack">
             <strong>PANEL 13c</strong><br><br>
-            THUD.<br><br>
-            Takeshi collapses. His head hits the pavement. Blood pools slowly beneath his silver hair.<br><br>
-            <em>KAZUO (internal): "Shit. Shit shit shit—"</em>
+            Kazuo gets on top of Takeshi and raises his fist, the old man grabs Takeshi's collar<br><br>
+            TAKESHI: "Don't... do this..."
         </div>
 
         <div class="comic-panel panel-hidden" data-path="attack">
             <strong>PANEL 14c</strong><br><br>
+            Kazuo's fist is already clenched. His heart pounds. The old man is hurt, disoriented, vulnerable.<br><br>
+            <em>KAZUO (internal): "One more hit and he's down. Just take the wallet and run."</em><br><br>
+            But something in the old man's eyes...
+        </div>
+
+        <!-- SECOND DECISION POINT -->
+        <div class="decision-point panel-hidden" id="decision2" data-path="attack">
+            <h3>The old man is hurt but still standing...</h3>
+            <p><em>"Finish this. Or just take what you need and run. Either way, you've already crossed the line."</em></p>
+            <div class="decision-buttons">
+                <button class="choice-button" onclick="makeChoice('decision2', 'finish')">
+                    👊 Hit him again. Put him down. No witnesses.
+                </button>
+                <button class="choice-button" onclick="makeChoice('decision2', 'grab')">
+                    💰 Just grab the wallet and run. Don't make this worse.
+                </button>
+            </div>
+        </div>
+
+        <!-- ATTACK PATH A: FINISH HIM (TRAGIC ENDING) -->
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 15a</strong><br><br>
+            Kazuo's face hardens. <em>No turning back now.</em><br><br>
+            He steps forward. Takeshi tries to raise his guard but he's too slow, too hurt.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 16a</strong><br><br>
+            THUD.<br><br>
+            The second punch lands clean. Takeshi's head snaps back.<br><br>
+            He collapses to the pavement. Blood pools slowly beneath his silver hair.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 17a</strong><br><br>
+            'Shit, shit, shit! That was not-'
             Kazuo's hands shake as he rifles through Takeshi's pockets. Wallet. Cash.<br><br>
             ¥23,000. More than enough for rent.<br><br>
             The old man groans weakly. Still alive. Barely.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 15c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 18a</strong><br><br>
             Kazuo runs. Doesn't look back. Can't look back.<br><br>
             His footsteps echo in the grey streets. Behind him, someone screams for an ambulance.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 16c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 19a</strong><br><br>
             That night: Kazuo counts the money with trembling hands. The bills are stained with Takeshi's blood.<br><br>
             He tries to sleep. Can't. Every time he closes his eyes, he sees the old man's shocked expression.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 17c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 20a</strong><br><br>
             <strong>ONE WEEK LATER.</strong><br><br>
             Kazuo walks past that corner. Crime scene tape is gone now. Just a dark stain on the sidewalk.<br><br>
             He lights a cigarette with shaking hands.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 18c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 21a</strong><br><br>
             <strong>TWO WEEKS LATER.</strong><br><br>
             Kazuo sits in a convenience store, flipping through a newspaper. Then he sees it:<br><br>
             <em>"LEGENDARY DOJO CLOSES AFTER 40 YEARS - Master Takeshi Yamamoto Unable to Continue After Assault"</em>
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 19c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 22a</strong><br><br>
             The article continues: <em>"Master Yamamoto, 73, suffered severe head trauma in a random attack. While he survived, doctors say he'll never fully recover. The Yamamoto Dojo, which has trained over 500 students since 1985, will close permanently."</em>
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 20c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 23a</strong><br><br>
             There's a photo. Takeshi in his prime, surrounded by students. All of them smiling. A 40-year legacy.<br><br>
             The newspaper slips from Kazuo's hands.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 21c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 24a</strong><br><br>
             That night: Kazuo sits in front of Riku's photo. The ¥23,000 is spread out before him. Blood money.<br><br>
             KAZUO: "I destroyed him, Riku. Destroyed everything he built. For... for rent money."
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 22c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 25a</strong><br><br>
             He picks up the bills one by one. Tears them slowly. Methodically.<br><br>
             They flutter to the ground like grey snow.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 23c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 26a</strong><br><br>
             <strong>ONE MONTH LATER.</strong><br><br>
             Kazuo stands outside the closed dojo. The sign still hangs: <em>"Yamamoto Dojo - Where the Lost Find Their Way"</em><br><br>
             But the doors are chained shut. Windows dark.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 24c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 27a</strong><br><br>
             He places something at the door. A letter. An apology that will never be enough.<br><br>
             ¥23,000 in an envelope. The money he tore and taped back together.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 25c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 28a</strong><br><br>
             <strong>SIX MONTHS LATER.</strong><br><br>
             Kazuo's apartment. Worse than ever. He doesn't leave anymore. Can't.<br><br>
             The newspaper article is pinned to the wall next to Riku's photo. Two ghosts watching him.
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 26c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 29a</strong><br><br>
             Close-up: His eyes. Empty. Haunted. Destroyed.<br><br>
             <em>KAZUO (internal): "I don't deserve redemption. I don't deserve anything."</em>
         </div>
 
-        <div class="comic-panel panel-hidden" data-path="attack">
-            <strong>PANEL 27c</strong><br><br>
+        <div class="comic-panel panel-hidden" data-path="finish">
+            <strong>PANEL 30a</strong><br><br>
             Final panel: Kazuo sits in darkness, staring at nothing.<br><br>
             Behind him: Riku's photo. The newspaper article. And written on the wall in shaky handwriting:<br><br>
             <em>"I'm sorry. I'm sorry. I'm sorry. I'm sorry."</em><br><br>
             Over and over and over.
         </div>
 
-        <div class="end-message bad-ending panel-hidden" data-path="attack">
+        <div class="end-message bad-ending panel-hidden" data-path="finish">
             <h3>💀 ENDING: Point of No Return</h3>
             <p><em>"Some sins can never be forgiven. Some damage can never be undone."</em><br><br>
-            Kazuo got his rent money. ¥23,000. The cost? A 73-year-old man's future. A 40-year legacy. 500 students who lost their teacher. A beacon of hope in a grey world, snuffed out.<br><br>
-            Master Takeshi survived the assault—barely. But the dojo didn't. The place where the lost found their way is now just another empty building in a grey city.<br><br>
-            Kazuo can't undo what he did. Can't bring back what he destroyed. The guilt doesn't fade—it metastasizes. It becomes him.<br><br>
-            <strong>This is what happens when you choose violence over connection. When you take instead of receive. When you destroy the only hand reaching out to save you.</strong><br><br>
+            Kazuo had a choice. In that moment, when Takeshi was hurt but still standing, still offering a chance to stop—Kazuo chose violence. Chose to finish what he started.<br><br>
+            ¥23,000. The cost? A 73-year-old man's future. A 40-year legacy. 500 students who lost their teacher. A beacon of hope in a grey world, snuffed out.<br><br>
+            Master Takeshi survived—barely. But the dojo didn't. The place where the lost found their way is now just another empty building.<br><br>
+            <strong>This is what happens when you don't just make a mistake—you double down on it.</strong><br><br>
             There is no redemption here. No second chances. No forgiveness.<br><br>
             Just a closed dojo. A ruined life. And the echo of what could have been.<br><br>
             <em>Irreversible. Permanent. Final.</em></p>
         </div>
 
-        <!-- CHOICE 4: ROAST -->
-        <div class="comic-panel panel-hidden" data-path="roast">
-            <strong>PANEL 10d</strong><br><br>
-            Kazuo walks up with his signature cocky smirk. Same smirk he uses to hide everything else.<br><br>
-            KAZUO: "Yo gramps! You lost? Nursing home's two blocks that way."
+        <!-- ATTACK PATH B: GRAB WALLET (REDEMPTION PATH) -->
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 15b</strong><br><br>
+            Kazuo's fist unclenches. He can't. He WON'T.<br><br>
+            KAZUO: "Just... just give me your wallet!"<br><br>
+            He shoves Takeshi back and yanks the wallet from his pocket.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 16b</strong><br><br>
+            Takeshi stumbles, catching himself. Blood drips from his temple but his eyes... they're not angry. They're sad.<br><br>
+            TAKESHI: "Is this who you want to be?"
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 17b</strong><br><br>
+            Kazuo doesn't answer. Can't answer. He runs.<br><br>
+            Behind him, Takeshi leans against the wall, one hand pressed to his bleeding head. Someone is already recording on their phone.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 18b</strong><br><br>
+            <strong>THREE HOURS LATER.</strong><br><br>
+            Kazuo's phone won't stop buzzing. He picks it up with shaking hands.<br><br>
+            Notifications. Hundreds of them. All the same video.<br><br>
+            <em>"PUNK ATTACKS OLD MAN ON STREET"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 19b</strong><br><br>
+            The video: Crystal clear. Shows everything. The sucker punch. The wallet grab. Takeshi's sad expression.<br><br>
+            <strong>Views: 2.1 million</strong><br><br>
+            Comments: <em>"Find this guy." "What a coward." "Hope karma gets him."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 20b</strong><br><br>
+            <strong>ONE WEEK LATER.</strong><br><br>
+            The video has gone mega-viral. <strong>40 million views.</strong> Memes everywhere. Reaction videos. Doxxing attempts.<br><br>
+            Kazuo's face is EVERYWHERE. "Street Punk Guy" becomes infamous.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 21b</strong><br><br>
+            He can't go outside without being recognized. People point. Spit. One throws a drink at him.<br><br>
+            His landlord saw the video. Eviction notice: <em>"Get out. Now."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 22b</strong><br><br>
+            Kazuo sits in his nearly-empty apartment. Boxes packed. Nowhere to go.<br><br>
+            Takeshi's wallet sits on the table. ¥23,000 inside. Blood-stained. Untouched.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 23b</strong><br><br>
+            He stares at Riku's photo—one of the few things not packed yet.<br><br>
+            KAZUO: "I didn't hit him again. That counts for something, right?"<br><br>
+            Silence. It doesn't count for anything.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 24b</strong><br><br>
+            <strong>ONE MONTH LATER.</strong><br><br>
+            Kazuo wanders the grey city. Sleeping rough. Avoiding cameras. The video is dying down but his face isn't forgotten.<br><br>
+            He walks without purpose. Just surviving. Again.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 25b</strong><br><br>
+            Then—he sees it. A building he's never noticed before.<br><br>
+            A sign: <em>"Yamamoto Dojo - Where the Lost Find Their Way"</em><br><br>
+            His heart stops.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 26b</strong><br><br>
+            Through the window: Students training. And there, leading them—<br><br>
+            Takeshi. The old man. Bandage still on his temple. But alive. Teaching.<br><br>
+            <em>KAZUO (internal): "He's... he's okay?"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 27b</strong><br><br>
+            Kazuo's hand goes to his pocket. The wallet. Still carrying it. Can't bring himself to spend it or throw it away.<br><br>
+            He turns to leave—
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 28b</strong><br><br>
+            The door opens.<br><br>
+            TAKESHI: "Boy."<br><br>
+            Kazuo freezes. Can't look at him. Can't run.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 29b</strong><br><br>
+            KAZUO: "I... I have your wallet. I didn't—I didn't spend it."<br><br>
+            He holds it out with trembling hands.<br><br>
+            TAKESHI: "I know. Come inside."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 30b</strong><br><br>
+            KAZUO: "Are you insane? After what I did—"<br><br>
+            TAKESHI: "You stopped. That's what matters."<br><br>
+            He touches the bandage on his head.<br><br>
+            TAKESHI: "You had a choice. You chose not to make it worse."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 31b</strong><br><br>
+            KAZUO: "I still attacked you. Stole from you. Got you—"<br><br>
+            He gestures vaguely at the bandage, voice breaking.<br><br>
+            KAZUO: "The whole world saw. I'm a fucking monster."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 32b</strong><br><br>
+            Takeshi takes the wallet. Opens it. Takes out the money and hands it back to Kazuo.<br><br>
+            TAKESHI: "This is your tuition. You've already paid in shame. Now pay in effort."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 33b</strong><br><br>
+            Kazuo looks up, eyes watering. Takeshi's expression is calm. Kind. The bandage a reminder of what Kazuo did—but not a barrier.<br><br>
+            TAKESHI: "The world taught you humility. Now I'll teach you discipline."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 34b</strong><br><br>
+            KAZUO: "Why? Why would you—"<br><br>
+            TAKESHI: "Because fifty years ago, I made a choice like yours. Someone gave me a second chance."<br><br>
+            He smiles softly.<br><br>
+            TAKESHI: "Now it's my turn."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 35b</strong><br><br>
+            Takeshi extends his hand. Kazuo stares at it. The same hand he hurt.<br><br>
+            Now offered in peace. In mentorship. In impossible forgiveness.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 36b</strong><br><br>
+            Close-up: Kazuo's hand, trembling, reaching out.<br><br>
+            Their hands clasp.<br><br>
+            For the first time in three years, Kazuo feels something other than grey.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="grab">
+            <strong>PANEL 37b</strong><br><br>
+            Final panel: Wide shot. Kazuo steps through the dojo doors. Behind him, the grey city and his viral shame. Ahead, warm light and the sound of training.<br><br>
+            Riku's photo—visible in his backpack—seems to be smiling.
+        </div>
+
+        <div class="end-message panel-hidden" data-path="grab">
+            <h3>🥋 ENDING: The Choice That Mattered</h3>
+            <p><em>"Redemption isn't about erasing your mistakes—it's about not making them worse."</em><br><br>
+            Kazuo attacked an old man. Stole his wallet. Got 40 million people to watch his shame.<br><br>
+            But in that moment—when Takeshi was hurt and vulnerable—Kazuo made a choice. He didn't finish it. Didn't double down. Didn't cross the line into irreversible tragedy.<br><br>
+            He stopped.<br><br>
+            And that small mercy—that one moment of restraint in the middle of violence—opened a door he thought he'd closed forever.<br><br>
+            <strong>Master Takeshi saw it too. Saw the boy who stopped himself. Who carried the wallet for a month, unable to spend blood money. Who still had enough soul left to feel shame.</strong><br><br>
+            The internet will forget. The memes will fade. But what Kazuo learns in that dojo—discipline, purpose, forgiveness—that's permanent.<br><br>
+            He paid for his second chance in public humiliation and private guilt. And somehow, that was exactly the price required.<br><br>
+            <em>The dojo doors close behind him. A new chapter begins.</em></p>
+        </div>
+            
         </div>
 
         <div class="comic-panel panel-hidden" data-path="roast">
@@ -883,7 +1079,7 @@
         <!-- Navigation -->
         <div class="navigation">
             <button class="nav-button" onclick="restartStory()">🔄 Try Different Path</button>
-            <a href="/series4/index.html" class="nav-button">Series Home</a>
+            <a href="../index.html" class="nav-button">Series Home</a>
             <a href="#" class="nav-button disabled">Next Chapter →</a>
         </div>
     </div>
@@ -893,7 +1089,7 @@
         <p><a href="../index.html" style="color: #ff6b6b; text-decoration: none;">View All Series</a></p>
     </footer>
 
-    <script>
+            <script>
         let choiceHistory = [];
 
         function makeChoice(decisionId, choice) {

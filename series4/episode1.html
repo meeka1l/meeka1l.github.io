@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Grey Life - Interactive Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #ff6b6b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #ff9999;
+        }
+
+        .reader-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .episode-title {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .episode-title h2 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .comic-panel {
+            width: 100%;
+            margin-bottom: 5px;
+            display: block;
+            background-color: #2a2a2a;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 3px;
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #cccccc;
+        }
+
+        .panel-hidden {
+            display: none;
+        }
+
+        .decision-point {
+            background-color: #2a2a2a;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 20px 0 5px 0;
+            text-align: center;
+            border: 3px solid #ff6b6b;
+        }
+
+        .decision-point h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .decision-point p {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .decision-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .choice-button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.05em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+
+        .choice-button:hover {
+            background-color: #ff9999;
+        }
+
+        .choice-button:disabled {
+            background-color: #555555;
+            cursor: not-allowed;
+        }
+
+        .choice-made {
+            background-color: #4CAF50;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .navigation {
+            background-color: #2a2a2a;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .nav-button:hover {
+            background-color: #ff9999;
+        }
+
+        .nav-button.disabled {
+            background-color: #555555;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .end-message {
+            background-color: #2a2a2a;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 5px 0;
+            border: 3px solid #4CAF50;
+        }
+
+        .end-message.bad-ending {
+            border-color: #ff6b6b;
+        }
+
+        .end-message.neutral-ending {
+            border-color: #999999;
+        }
+
+        .end-message h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .end-message.bad-ending h3 {
+            color: #ff6b6b;
+        }
+
+        .end-message.neutral-ending h3 {
+            color: #999999;
+        }
+
+        .end-message p {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #000000;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            color: #cccccc;
+        }
+
+        @media (max-width: 600px) {
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .nav-button {
+                width: 100%;
+            }
+
+            .comic-panel {
+                padding: 40px 20px;
+                font-size: 1em;
+            }
+
+            .decision-point {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/series4/index.html" class="back-button">← Back</a>
+        <h1>A GREY LIFE</h1>
+    </header>
+
+    <div class="reader-container">
+        <div class="episode-title">
+            <h2>Chapter 1: The Old Man</h2>
+            <p>An Interactive Story</p>
+        </div>
+
+        <!-- OPENING - ESTABLISH CHARACTER -->
+        <div class="comic-panel">
+            <strong>PANEL 1</strong><br><br>
+            A cramped studio apartment. Dirty dishes in the sink. Empty beer cans scattered on the floor. Cigarette butts overflowing from an ashtray.<br><br>
+            On the wall: a faded photograph. Two young men, arms around each other's shoulders, laughing. One of them is crossed out with black marker.
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 2</strong><br><br>
+            Our protagonist—KAZUO, mid-20s, messy hair, leather jacket—stares at the photo. His hand hovers over it, then pulls away.<br><br>
+            <em>KAZUO (internal): "Three years, huh? Feels like yesterday, Riku."</em>
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 3</strong><br><br>
+            Kazuo lights a cigarette, grabs his keys, walks out. The door slams behind him.<br><br>
+            <em>KAZUO (internal): "Same walk. Same streets. Same grey fucking life. But it's easier than thinking about—"</em><br><br>
+            He stops mid-thought. Shakes his head.
+        </div>
+
+        <!-- STREET SETUP -->
+        <div class="comic-panel">
+            <strong>PANEL 4</strong><br><br>
+            Wide shot: A grey city street. Few pedestrians. Cars pass by lazily. Everything feels washed out, colorless.<br><br>
+            Kazuo walks with his hands in his pockets, cigarette dangling from his lips. His posture screams "don't talk to me."
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 5</strong><br><br>
+            <em>KAZUO (internal): "Tuesdays are the worst. Not weekend. Not Monday chaos. Just... empty. Like me."</em><br><br>
+            He exhales smoke into the grey sky.
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 6</strong><br><br>
+            Then—he sees him.<br><br>
+            An OLD MAN stands on the corner. 70s, grey hair in a neat ponytail. Clean but worn traditional clothes. He's perfectly still, looking up at the sky with a serene expression.<br><br>
+            Something about him stands out in this grey world.
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 7</strong><br><br>
+            Kazuo slows down, observing. The old man's posture is straight, controlled. There's a quiet strength in how he carries himself.<br><br>
+            <em>KAZUO (internal): "What's this old geezer doing? Just... standing there. Looking at nothing."</em>
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 8</strong><br><br>
+            The old man lowers his gaze and notices Kazuo staring. Their eyes meet.<br><br>
+            For a moment, Kazuo feels... seen. Actually seen. Not just looked at.<br><br>
+            The old man smiles faintly and nods, then returns to watching the sky.
+        </div>
+
+        <div class="comic-panel">
+            <strong>PANEL 9</strong><br><br>
+            Close-up: Kazuo's face. He's caught off-guard. His usual detached expression cracks slightly.<br><br>
+            <em>KAZUO (internal): "...Weird. Why's my heart beating faster?"</em><br><br>
+            He takes a drag, trying to look casual. But something in him is stirring.
+        </div>
+
+        <!-- DECISION POINT -->
+        <div class="decision-point" id="decision1">
+            <h3>What does Kazuo do?</h3>
+            <p><em>"Riku would've talked to him. Always made friends with random people. But I'm not Riku..."</em></p>
+            <div class="decision-buttons">
+                <button class="choice-button" onclick="makeChoice('decision1', 'walk')">
+                    🚶 Keep walking. Not your problem. Never is.
+                </button>
+                <button class="choice-button" onclick="makeChoice('decision1', 'compliment')">
+                    💬 "...Hey. Nice posture, old man. You a dancer or something?"
+                </button>
+                <button class="choice-button" onclick="makeChoice('decision1', 'attack')">
+                    👊 Check if he's got a wallet. Easy target. You need the money anyway.
+                </button>
+                <button class="choice-button" onclick="makeChoice('decision1', 'roast')">
+                    😤 "Yo gramps, you lost? Nursing home's two blocks that way."
+                </button>
+            </div>
+        </div>
+
+        <!-- CHOICE 1: KEEP WALKING -->
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 10a</strong><br><br>
+            Kazuo looks away and keeps walking. One foot in front of the other.<br><br>
+            <em>KAZUO (internal): "Not my business. Never is."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 11a</strong><br><br>
+            He walks about twenty feet... then stops. Looks back over his shoulder.<br><br>
+            The old man is still there, still peaceful. Still everything Kazuo isn't.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 12a</strong><br><br>
+            <em>KAZUO (internal): "...What if I—"</em><br><br>
+            He turns forward again. Keeps walking.<br><br>
+            <em>"No. Easier this way."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 13a</strong><br><br>
+            The sun sets. Kazuo lights another cigarette from the dying embers of his last one.<br><br>
+            The street gets greyer. Everything always gets greyer.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 14a</strong><br><br>
+            That night: Kazuo sits in his apartment, staring at that photo again.<br><br>
+            <em>KAZUO: "Riku would've stopped. Would've talked to him. Would've..."</em><br><br>
+            He closes his eyes.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 15a</strong><br><br>
+            One year later.<br><br>
+            Same street. Same grey sky. Same Kazuo—older, more worn, chain-smoking his way through another Tuesday.<br><br>
+            He walks past that same corner. The old man never came back.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 16a</strong><br><br>
+            Kazuo stops at the corner. Stares at the empty space where Takeshi once stood.<br><br>
+            <em>KAZUO (internal): "Wonder what he would've said. If I'd just..."</em><br><br>
+            He doesn't finish the thought. Never does.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 17a</strong><br><br>
+            At home: The apartment is worse. More beer cans. Overflowing ashtray. Riku's photo is completely covered in dust now.<br><br>
+            Kazuo walks past it without even glancing. <em>Easier not to.</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 18a</strong><br><br>
+            He collapses onto his stained couch. Lights another cigarette from the one he's finishing.<br><br>
+            The TV flickers—some reality show he's not watching.<br><br>
+            <em>KAZUO (internal): "This is fine. This is... fine."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 19a</strong><br><br>
+            Close-up: His eyes. Empty. Grey. Like the city. Like everything.<br><br>
+            He takes a long drag. Exhales smoke into the stale air of his life.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="walk">
+            <strong>PANEL 20a</strong><br><br>
+            Final panel: Wide shot of the apartment. Kazuo small in the frame, drowning in garbage and memories.<br><br>
+            The photo of Riku—barely visible under dust—seems to be fading away.<br><br>
+            Just like everything else.
+        </div>
+
+        <div class="end-message bad-ending panel-hidden" data-path="walk">
+            <h3>⚫ ENDING: Fade to Grey</h3>
+            <p><em>"The saddest thing about opportunities is that they don't knock twice."</em><br><br>
+            Kazuo walked past the moment that could have changed everything. Master Takeshi never returned to that corner. Why would he? There was no one there worth waiting for.<br><br>
+            One year later: Nothing changed. Everything got worse.<br><br>
+            More cigarettes. More beer. More grey. Riku's memory fades under layers of dust and apathy. The apartment gets smaller. The world gets greyer. Life becomes a loop of Tuesdays.<br><br>
+            <strong>Some people aren't destroyed by their pain—they just slowly dissolve into it.</strong><br><br>
+            There is no dojo. No redemption arc. No second chances. No hope.<br><br>
+            Just grey. Forever.</p>
+        </div>
+
+        <!-- CHOICE 2: COMPLIMENT -->
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 10b</strong><br><br>
+            Kazuo walks closer, fighting his instinct to just keep moving.<br><br>
+            KAZUO: "...Hey."<br><br>
+            The old man turns, eyebrows raised slightly.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 11b</strong><br><br>
+            KAZUO: "Nice posture, old man. You a dancer or something?"<br><br>
+            It comes out more defensive than he intended. But the old man just smiles warmly.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 12b</strong><br><br>
+            OLD MAN: "Ha! A dancer? No, young man. A fighter. Fifty-three years of martial arts."<br><br>
+            He taps his chest with quiet pride.<br><br>
+            OLD MAN: "The body remembers discipline even when the mind forgets."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 13b</strong><br><br>
+            Kazuo blinks. Takes a drag from his cigarette.<br><br>
+            KAZUO: "Fifty-three years? Damn. Must've been through some shit."<br><br>
+            The old man chuckles—a warm, genuine sound.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 14b</strong><br><br>
+            OLD MAN: "More than you'd believe. But you—you have good eyes. Most people these days, they don't see. They look, but they don't see."<br><br>
+            He studies Kazuo carefully.<br><br>
+            OLD MAN: "You see, though. Even through all that pain you're carrying."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 15b</strong><br><br>
+            Kazuo freezes. His cigarette burns forgotten between his fingers.<br><br>
+            <em>KAZUO (internal): "How the hell does he—"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 16b</strong><br><br>
+            The old man extends his hand.<br><br>
+            OLD MAN: "Takeshi Yamamoto. And you are?"<br><br>
+            Kazuo stares at the hand. Then, slowly, shakes it. The grip is firm but not aggressive.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 17b</strong><br><br>
+            KAZUO: "...Kazuo. Just Kazuo."<br><br>
+            TAKESHI: "Just Kazuo, hm? Well, 'Just Kazuo,' you still train?"<br><br>
+            KAZUO: "Train? Nah. Used to street fight a bit. Nothing serious."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 18b</strong><br><br>
+            Takeshi nods slowly, understanding more than what's said.<br><br>
+            TAKESHI: "Street fighting. Survival. But no discipline. No purpose."<br><br>
+            He looks Kazuo dead in the eyes.<br><br>
+            TAKESHI: "Tell me—are you living, or just surviving?"
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 19b</strong><br><br>
+            The question hits Kazuo like a punch to the gut. His mouth opens but no words come out.<br><br>
+            The cigarette burns down to his fingers. He drops it, crushes it under his boot.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 20b</strong><br><br>
+            KAZUO: "...Does it matter?"<br><br>
+            TAKESHI: "To you? Maybe not yet. But to the memory you're running from? Yes. It matters very much."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 21b</strong><br><br>
+            Kazuo's fists clench. His breathing gets heavier.<br><br>
+            KAZUO: "You don't know shit about—"<br><br>
+            TAKESHI: "I don't. You're right."<br><br>
+            He pulls out a small card, hands it to Kazuo.<br><br>
+            TAKESHI: "But I know what a lost soul looks like. I was one, once."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 22b</strong><br><br>
+            Kazuo looks at the card. It has an address and one line:<br>
+            <em>"Yamamoto Dojo - Where the Lost Find Their Way"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 23b</strong><br><br>
+            TAKESHI: "Tomorrow morning. Six AM. If you come, I'll teach you. If you don't..."<br><br>
+            He shrugs gently.<br><br>
+            TAKESHI: "...then you've already made your choice."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 24b</strong><br><br>
+            Takeshi bows slightly and begins to walk away. Kazuo stands there, card in hand, as the old man disappears into the grey city.<br><br>
+            <em>KAZUO (internal): "Six AM... Riku used to wake up at six. For his morning runs..."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 25b</strong><br><br>
+            That night: Kazuo sits at his window, smoking, staring at the card.<br><br>
+            The city lights flicker. The photo of Riku watches from the wall.<br><br>
+            He looks at his phone. Sets an alarm.<br><br>
+            <strong>5:30 AM.</strong>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="compliment">
+            <strong>PANEL 26b</strong><br><br>
+            Close-up: Kazuo's face. For the first time in three years, there's something in his eyes that isn't emptiness.<br><br>
+            It's small. Fragile. But it's there.<br><br>
+            <em>Hope.</em>
+        </div>
+
+        <div class="end-message panel-hidden" data-path="compliment">
+            <h3>✨ ENDING: A New Dawn</h3>
+            <p><em>"Respect opens doors that force can never break."</em><br><br>
+            Master Takeshi saw what Kazuo couldn't see in himself—potential buried under grief and self-destruction. A simple compliment, a moment of genuine connection, changed everything.<br><br>
+            Whether Kazuo shows up at 6 AM is still uncertain. But for the first time since Riku's death, he's considering the possibility that life could be more than grey.<br><br>
+            <strong>Sometimes all it takes is one person who sees you.</strong><br><br>
+            The alarm is set. Tomorrow, Kazuo will make a choice. And this time, he might choose to live instead of just survive.</p>
+        </div>
+
+        <!-- CHOICE 3: ATTACK -->
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 10c</strong><br><br>
+            <em>KAZUO (internal): "Old guy. Alone. Probably has a wallet. Rent's due in three days and I'm two hundred short."</em><br><br>
+            He flicks his cigarette away. Approaches casually.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 11c</strong><br><br>
+            KAZUO: "Excuse me, you got the time?"<br><br>
+            The old man turns, smiling gently—<br><br>
+            <em>KAZUO (internal): "Now!"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 12c</strong><br><br>
+            CRACK.<br><br>
+            Kazuo's fist connects with Takeshi's temple. The old man's eyes go wide with shock.<br><br>
+            He staggers backward, hand reaching for the wall that isn't there.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 13c</strong><br><br>
+            THUD.<br><br>
+            Takeshi collapses. His head hits the pavement. Blood pools slowly beneath his silver hair.<br><br>
+            <em>KAZUO (internal): "Shit. Shit shit shit—"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 14c</strong><br><br>
+            Kazuo's hands shake as he rifles through Takeshi's pockets. Wallet. Cash.<br><br>
+            ¥23,000. More than enough for rent.<br><br>
+            The old man groans weakly. Still alive. Barely.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 15c</strong><br><br>
+            Kazuo runs. Doesn't look back. Can't look back.<br><br>
+            His footsteps echo in the grey streets. Behind him, someone screams for an ambulance.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 16c</strong><br><br>
+            That night: Kazuo counts the money with trembling hands. The bills are stained with Takeshi's blood.<br><br>
+            He tries to sleep. Can't. Every time he closes his eyes, he sees the old man's shocked expression.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 17c</strong><br><br>
+            <strong>ONE WEEK LATER.</strong><br><br>
+            Kazuo walks past that corner. Crime scene tape is gone now. Just a dark stain on the sidewalk.<br><br>
+            He lights a cigarette with shaking hands.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 18c</strong><br><br>
+            <strong>TWO WEEKS LATER.</strong><br><br>
+            Kazuo sits in a convenience store, flipping through a newspaper. Then he sees it:<br><br>
+            <em>"LEGENDARY DOJO CLOSES AFTER 40 YEARS - Master Takeshi Yamamoto Unable to Continue After Assault"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 19c</strong><br><br>
+            The article continues: <em>"Master Yamamoto, 73, suffered severe head trauma in a random attack. While he survived, doctors say he'll never fully recover. The Yamamoto Dojo, which has trained over 500 students since 1985, will close permanently."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 20c</strong><br><br>
+            There's a photo. Takeshi in his prime, surrounded by students. All of them smiling. A 40-year legacy.<br><br>
+            The newspaper slips from Kazuo's hands.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 21c</strong><br><br>
+            That night: Kazuo sits in front of Riku's photo. The ¥23,000 is spread out before him. Blood money.<br><br>
+            KAZUO: "I destroyed him, Riku. Destroyed everything he built. For... for rent money."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 22c</strong><br><br>
+            He picks up the bills one by one. Tears them slowly. Methodically.<br><br>
+            They flutter to the ground like grey snow.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 23c</strong><br><br>
+            <strong>ONE MONTH LATER.</strong><br><br>
+            Kazuo stands outside the closed dojo. The sign still hangs: <em>"Yamamoto Dojo - Where the Lost Find Their Way"</em><br><br>
+            But the doors are chained shut. Windows dark.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 24c</strong><br><br>
+            He places something at the door. A letter. An apology that will never be enough.<br><br>
+            ¥23,000 in an envelope. The money he tore and taped back together.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 25c</strong><br><br>
+            <strong>SIX MONTHS LATER.</strong><br><br>
+            Kazuo's apartment. Worse than ever. He doesn't leave anymore. Can't.<br><br>
+            The newspaper article is pinned to the wall next to Riku's photo. Two ghosts watching him.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 26c</strong><br><br>
+            Close-up: His eyes. Empty. Haunted. Destroyed.<br><br>
+            <em>KAZUO (internal): "I don't deserve redemption. I don't deserve anything."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="attack">
+            <strong>PANEL 27c</strong><br><br>
+            Final panel: Kazuo sits in darkness, staring at nothing.<br><br>
+            Behind him: Riku's photo. The newspaper article. And written on the wall in shaky handwriting:<br><br>
+            <em>"I'm sorry. I'm sorry. I'm sorry. I'm sorry."</em><br><br>
+            Over and over and over.
+        </div>
+
+        <div class="end-message bad-ending panel-hidden" data-path="attack">
+            <h3>💀 ENDING: Point of No Return</h3>
+            <p><em>"Some sins can never be forgiven. Some damage can never be undone."</em><br><br>
+            Kazuo got his rent money. ¥23,000. The cost? A 73-year-old man's future. A 40-year legacy. 500 students who lost their teacher. A beacon of hope in a grey world, snuffed out.<br><br>
+            Master Takeshi survived the assault—barely. But the dojo didn't. The place where the lost found their way is now just another empty building in a grey city.<br><br>
+            Kazuo can't undo what he did. Can't bring back what he destroyed. The guilt doesn't fade—it metastasizes. It becomes him.<br><br>
+            <strong>This is what happens when you choose violence over connection. When you take instead of receive. When you destroy the only hand reaching out to save you.</strong><br><br>
+            There is no redemption here. No second chances. No forgiveness.<br><br>
+            Just a closed dojo. A ruined life. And the echo of what could have been.<br><br>
+            <em>Irreversible. Permanent. Final.</em></p>
+        </div>
+
+        <!-- CHOICE 4: ROAST -->
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 10d</strong><br><br>
+            Kazuo walks up with his signature cocky smirk. Same smirk he uses to hide everything else.<br><br>
+            KAZUO: "Yo gramps! You lost? Nursing home's two blocks that way."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 11d</strong><br><br>
+            The old man slowly turns. Doesn't smile. Doesn't frown. Just... looks at Kazuo. Really looks at him.<br><br>
+            For some reason, that stare makes Kazuo's skin crawl.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 12d</strong><br><br>
+            KAZUO: "What, cat got your tongue? Or did you forget how to talk in your old—"<br><br>
+            TAKESHI: "I see."<br><br>
+            His voice is quiet. Calm. Somehow that's worse than yelling.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 13d</strong><br><br>
+            TAKESHI: "You mock elders. Disrespect strangers. Use humor as armor."<br><br>
+            He steps forward. Kazuo instinctively takes a step back.<br><br>
+            TAKESHI: "Tell me—who hurt you so badly that you became this?"
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 14d</strong><br><br>
+            Kazuo's smirk falters. His fists clench.<br><br>
+            KAZUO: "The hell's your problem, old man? I was just—"<br><br>
+            TAKESHI: "Pushing me away. Before I could get close enough to see the broken boy underneath."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 15d</strong><br><br>
+            Something in Kazuo snaps.<br><br>
+            KAZUO: "You don't know SHIT about me!"<br><br>
+            He winds up for a punch—
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 16d</strong><br><br>
+            WHAM.<br><br>
+            Kazuo's fist is caught mid-swing. The old man's hand is like iron around his wrist.<br><br>
+            TAKESHI: "No. But I know grief when I see it."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 17d</strong><br><br>
+            Kazuo tries to pull free. Can't. The old man's grip doesn't budge.<br><br>
+            KAZUO: "Let me go, you—"<br><br>
+            TAKESHI: "As you wish."<br><br>
+            He releases Kazuo's wrist—then his other hand moves.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 18d</strong><br><br>
+            CRACK. THUD. WHAM.<br><br>
+            Three strikes. Solar plexus. Jaw. Sweep to the legs.<br><br>
+            Kazuo doesn't even see them coming. One second he's standing. The next he's on his back, staring at the sky.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 19d</strong><br><br>
+            Everything hurts. His jaw feels dislocated. His chest is on fire. The world spins.<br><br>
+            The old man stands over him, dusting off his hands calmly.<br><br>
+            Someone nearby is... recording?
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 20d</strong><br><br>
+            TAKESHI: "Fifty-three years of discipline versus... what? Three years of running from your pain?"<br><br>
+            He kneels down beside Kazuo.<br><br>
+            TAKESHI: "Next time you want to mock someone, young man, make sure they haven't spent five decades earning respect."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 21d</strong><br><br>
+            Takeshi walks away. Kazuo lies there, tasting blood.<br><br>
+            <em>BYSTANDER: "Holy shit, did you get that?"</em><br><br>
+            <em>ANOTHER: "Dude, that was INSANE. I'm posting this RIGHT NOW."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 22d</strong><br><br>
+            <strong>THREE HOURS LATER.</strong><br><br>
+            Kazuo's phone won't stop buzzing. He picks it up with shaking hands.<br><br>
+            Notifications. Hundreds of them. All the same video.<br><br>
+            <em>"DISRESPECTFUL PUNK GETS WRECKED BY GRANDPA"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 23d</strong><br><br>
+            The video: Crystal clear. Shows everything. His cocky smirk. The insult. The failed punch. The absolute dismantling.<br><br>
+            <strong>Views: 847,000</strong><br><br>
+            Comments: <em>"Deserved." "Get humbled lmao." "That old man is a LEGEND."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 24d</strong><br><br>
+            <strong>ONE WEEK LATER.</strong><br><br>
+            The video has gone mega-viral. <strong>40 million views.</strong> Memes everywhere. Reaction videos. Analysis breakdowns.<br><br>
+            Kazuo's face is EVERYWHERE. "Disrespect Guy" becomes a meme template.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 25d</strong><br><br>
+            He can't go outside without being recognized. People point. Laugh. Record him.<br><br>
+            His landlord saw the video. Eviction notice: <em>"Don't want that kind of reputation in my building."</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 26d</strong><br><br>
+            Kazuo sits in his nearly-empty apartment. Boxes packed. Nowhere to go.<br><br>
+            His phone buzzes again. More notifications. More mockery. The internet never forgets.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 27d</strong><br><br>
+            He stares at Riku's photo—one of the few things not packed yet.<br><br>
+            KAZUO: "You'd tell me I deserved this, wouldn't you? And you'd be right."<br><br>
+            He laughs bitterly. It hurts his still-healing jaw.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 28d</strong><br><br>
+            <strong>ONE MONTH LATER.</strong><br><br>
+            Kazuo wanders the grey city. Sleeping rough. Avoiding cameras. The meme is dying down but his reputation isn't.<br><br>
+            He walks without purpose. Just surviving. Again.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 29d</strong><br><br>
+            Then—he sees it. A building he's never noticed before.<br><br>
+            A sign: <em>"Yamamoto Dojo - Where the Lost Find Their Way"</em><br><br>
+            His heart stops.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 30d</strong><br><br>
+            Through the window: Students training. And there, leading them—<br><br>
+            Takeshi. The old man. Looking exactly as serene as he did that day.<br><br>
+            <em>KAZUO (internal): "No. No way. I can't—"</em>
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 31d</strong><br><br>
+            He turns to leave. But the door opens.<br><br>
+            TAKESHI: "Kazuo."<br><br>
+            Kazuo freezes. Can't look at him.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 32d</strong><br><br>
+            KAZUO: "I... I didn't know this was..."<br><br>
+            TAKESHI: "I know. Come inside."<br><br>
+            KAZUO: "You've got to be kidding. After what I—after what happened—"<br><br>
+            TAKESHI: "You already paid your tuition. In humility. Now come."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 33d</strong><br><br>
+            Kazuo looks up. Takeshi's expression is calm. Kind. Not a trace of mockery or anger.<br><br>
+            TAKESHI: "The world taught you a lesson I never could. Now I can teach you the rest."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 34d</strong><br><br>
+            Kazuo's eyes water. He bites his lip, trying not to break down.<br><br>
+            KAZUO: "Why? Why would you help me after—"<br><br>
+            TAKESHI: "Because fifty years ago, someone gave me the same chance. Now it's my turn to pass it on."
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 35d</strong><br><br>
+            Takeshi extends his hand. The same hand that destroyed Kazuo a month ago.<br><br>
+            Now offered in peace. In mentorship. In forgiveness.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 36d</strong><br><br>
+            Close-up: Kazuo's hand, trembling, reaching out.<br><br>
+            Their hands clasp.<br><br>
+            For the first time in three years, Kazuo feels something other than grey.
+        </div>
+
+        <div class="comic-panel panel-hidden" data-path="roast">
+            <strong>PANEL 37d</strong><br><br>
+            Final panel: Wide shot. Kazuo steps through the dojo doors. Behind him, the grey city. Ahead, warm light and the sound of training.<br><br>
+            Riku's photo—visible in his backpack—seems to be smiling.
+        </div>
+
+        <div class="end-message panel-hidden" data-path="roast">
+            <h3>🥋 ENDING: Through Fire and Humiliation</h3>
+            <p><em>"Sometimes the universe teaches us lessons we're too stubborn to learn ourselves."</em><br><br>
+            Kazuo became internet famous—for all the wrong reasons. 40 million people watched him get humbled. He lost his apartment. His anonymity. His pride.<br><br>
+            But in losing everything, he found his way to the one place that could rebuild him.<br><br>
+            Master Takeshi didn't just beat Kazuo that day—he saw him. Saw the pain underneath the cruelty. And when Kazuo had been broken down by public humiliation, stripped of every defense and pretense...<br><br>
+            <strong>Takeshi was still there. Still offering a hand.</strong><br><br>
+            The memes will fade. The videos will be buried by new content. But what Kazuo learns in that dojo—discipline, respect, purpose—that's permanent.<br><br>
+            He paid for his redemption in the most modern way possible: viral humiliation. And somehow, that was exactly what he needed.<br><br>
+            <em>The dojo doors close behind him. A new chapter begins.</em></p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-button" onclick="restartStory()">🔄 Try Different Path</button>
+            <a href="/series4/index.html" class="nav-button">Series Home</a>
+            <a href="#" class="nav-button disabled">Next Chapter →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Meekail. All rights reserved.</p>
+        <p><a href="../index.html" style="color: #ff6b6b; text-decoration: none;">View All Series</a></p>
+    </footer>
+
+    <script>
+        let choiceHistory = [];
+
+        function makeChoice(decisionId, choice) {
+            // Record the choice
+            choiceHistory.push({ decisionId, choice });
+
+            // Get the decision point element
+            const decisionPoint = document.getElementById(decisionId);
+            
+            // Disable all buttons in this decision point
+            const buttons = decisionPoint.querySelectorAll('.choice-button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            // Show which choice was made
+            const choiceMade = document.createElement('div');
+            choiceMade.className = 'choice-made';
+            choiceMade.textContent = '✓ Choice made! Continue scrolling...';
+            decisionPoint.appendChild(choiceMade);
+
+            // Reveal the panels for this path
+            const panelsToReveal = document.querySelectorAll(`[data-path="${choice}"]`);
+            
+            setTimeout(() => {
+                panelsToReveal.forEach(panel => {
+                    panel.classList.remove('panel-hidden');
+                });
+
+                // Smooth scroll to the next panel
+                if (panelsToReveal.length > 0) {
+                    panelsToReveal[0].scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+            }, 500);
+        }
+
+        function restartStory() {
+            // Reset choice history
+            choiceHistory = [];
+
+            // Hide all panels with data-path attribute
+            document.querySelectorAll('[data-path]').forEach(panel => {
+                panel.classList.add('panel-hidden');
+            });
+
+            // Reset all decision points
+            document.querySelectorAll('.decision-point').forEach(decision => {
+                // Re-enable buttons
+                decision.querySelectorAll('.choice-button').forEach(btn => {
+                    btn.disabled = false;
+                });
+                
+                // Remove "choice made" messages
+                const choiceMade = decision.querySelector('.choice-made');
+                if (choiceMade) {
+                    choiceMade.remove();
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
